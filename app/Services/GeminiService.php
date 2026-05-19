@@ -9,7 +9,6 @@ class GeminiService
 {
     protected $apiKey;
     protected $baseUrl = 'https://integrate.api.nvidia.com/v1/chat/completions';
-    protected $defaultKey = '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';
 
     public function __construct()
     {
@@ -21,7 +20,7 @@ class GeminiService
      */
     public function getFinancialAdvice(array $summaryData): string
     {
-        $key = $this->apiKey ?: $this->defaultKey;
+        $key = $this->apiKey;
 
         $prompt = "You are a smart personal finance coach. Analyze the following monthly financial summary and provide 3 actionable, encouraging, and highly specific tips or insights. Keep the response concise, formatted in clean markdown, and tone professional but friendly. Use ₹ (Rupees) as the currency.
 
@@ -73,7 +72,7 @@ Summary data:
             return null;
         }
 
-        $key = $this->apiKey ?: $this->defaultKey;
+        $key = $this->apiKey;
         $imageData = base64_encode(file_get_contents($imagePath));
         $mimeType = mime_content_type($imagePath);
 
