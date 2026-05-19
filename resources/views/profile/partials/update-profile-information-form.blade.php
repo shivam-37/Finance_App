@@ -47,6 +47,18 @@
             @endif
         </div>
 
+        <div>
+            <x-input-label for="currency" :value="__('Preferred Currency')" />
+            <select id="currency" name="currency" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                @foreach (\App\Helpers\CurrencyHelper::getSymbols() as $code => $symbol)
+                    <option value="{{ $code }}" {{ old('currency', $user->currency ?? 'INR') === $code ? 'selected' : '' }}>
+                        {{ $code }} ({{ $symbol }})
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('currency')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 

@@ -2,16 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Transaction extends Model
 {
-    protected $fillable = ['user_id', 'category_id', 'amount', 'description', 'date', 'type'];
+    protected $connection = 'mongodb';
+
+    protected $fillable = [
+        'user_id',
+        'category_id',
+        'amount',
+        'description',
+        'date',
+        'type',
+        'is_recurring',
+        'frequency',
+        'next_due_date',
+        'currency',
+        'original_amount',
+        'receipt_path'
+    ];
 
     protected function casts(): array
     {
         return [
             'date' => 'date',
+            'is_recurring' => 'boolean',
+            'next_due_date' => 'date',
         ];
     }
 

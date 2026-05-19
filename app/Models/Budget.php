@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Budget extends Model
 {
+    protected $connection = 'mongodb';
+
     protected $fillable = ['user_id', 'category_id', 'amount', 'month'];
 
     public function user()

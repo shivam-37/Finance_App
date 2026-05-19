@@ -43,7 +43,7 @@ class BudgetController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|exists:categories,_id',
             'amount' => 'required|numeric|min:0.01',
             'month' => 'required|date_format:Y-m',
         ]);
@@ -78,7 +78,7 @@ class BudgetController extends Controller
         if ($budget->user_id !== Auth::id()) abort(403);
 
         $validated = $request->validate([
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|exists:categories,_id',
             'amount' => 'required|numeric|min:0.01',
             'month' => 'required|date_format:Y-m',
         ]);
