@@ -42,6 +42,18 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Create default categories for the new user
+        $defaultCategories = [
+            ['name' => 'Salary', 'type' => 'income', 'color' => '#10b981'],
+            ['name' => 'Food', 'type' => 'expense', 'color' => '#f43f5e'],
+            ['name' => 'Transport', 'type' => 'expense', 'color' => '#3b82f6'],
+            ['name' => 'Utilities', 'type' => 'expense', 'color' => '#f59e0b'],
+        ];
+
+        foreach ($defaultCategories as $category) {
+            $user->categories()->create($category);
+        }
+
         event(new Registered($user));
 
         Auth::login($user);

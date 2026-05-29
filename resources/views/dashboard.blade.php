@@ -1,8 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            @php $hour = now()->format('H'); @endphp
-            {{ $hour < 12 ? '☀️ Good Morning' : ($hour < 17 ? '🌤️ Good Afternoon' : '🌙 Good Evening') }}, {{ Auth::user()->name }}!
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight" x-data="{ hour: new Date().getHours() }">
+            <span x-text="hour < 12 ? '☀️ Good Morning' : (hour < 17 ? '🌤️ Good Afternoon' : '🌙 Good Evening')"></span>, {{ Auth::user()->name }}!
         </h2>
     </x-slot>
 
@@ -67,7 +66,7 @@
                             <span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-gray-800 dark:text-gray-200">{{ $savingsRate }}%</span>
                         </div>
                         <div>
-                            <p class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $currencySymbol }}{{ number_format($balance, 0) }}</p>
+                            <p class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $currencySymbol }}{{ number_format($income - $expense, 0) }}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">saved this month</p>
                         </div>
                     </div>

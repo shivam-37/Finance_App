@@ -105,7 +105,7 @@
         @endif
 
         <!-- Global Confirmation Modal -->
-        <div x-data="confirmModal">
+        <div x-data="confirmModal" @open-confirm.window="show($event.detail.title, $event.detail.message, $event.detail.form)">
             <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
                  x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"

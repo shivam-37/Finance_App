@@ -80,7 +80,7 @@ Summary data:
 1. 'amount' (numeric, total paid/received)
 2. 'description' (string, name of shop or purchase item)
 3. 'date' (format YYYY-MM-DD, default to current date if not found)
-4. 'type' (output 'income' if it looks like salary/deposit, otherwise output 'expense')
+4. 'type' (output 'income' if it looks like salary/salery/deposit, otherwise output 'expense')
 5. 'category' (string, a short general category like Groceries, Utilities, Travel, Food, etc.)
 
 Return the response ONLY as a valid JSON object matching these keys. Do not include markdown code block formatting (like ```json).";

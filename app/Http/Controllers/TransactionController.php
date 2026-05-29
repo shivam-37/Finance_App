@@ -28,10 +28,10 @@ class TransactionController extends Controller
             $query->where('description', 'like', '%' . $request->search . '%');
         }
         if ($request->filled('from')) {
-            $query->where('date', '>=', $request->from);
+            $query->where('date', '>=', \Carbon\Carbon::parse($request->from)->startOfDay());
         }
         if ($request->filled('to')) {
-            $query->where('date', '<=', $request->to);
+            $query->where('date', '<=', \Carbon\Carbon::parse($request->to)->endOfDay());
         }
 
         $transactions = $query->orderBy('date', 'desc')->paginate(15)->withQueryString();
@@ -319,8 +319,8 @@ class TransactionController extends Controller
 
         if ($request->filled('type')) $query->where('type', $request->type);
         if ($request->filled('category_id')) $query->where('category_id', $request->category_id);
-        if ($request->filled('from')) $query->where('date', '>=', $request->from);
-        if ($request->filled('to')) $query->where('date', '<=', $request->to);
+        if ($request->filled('from')) $query->where('date', '>=', \Carbon\Carbon::parse($request->from)->startOfDay());
+        if ($request->filled('to')) $query->where('date', '<=', \Carbon\Carbon::parse($request->to)->endOfDay());
 
         $transactions = $query->get();
         $userCurrency = Auth::user()->currency ?? 'INR';
