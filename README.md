@@ -1,59 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Personal Finance App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive personal finance management application built with Laravel. This application allows users to track their expenses, manage budgets, set financial goals, and gain insights into their financial habits through detailed reports. It features AI-powered transaction scanning using the Google Gemini API.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Authentication**: Secure login, registration, and profile management using Laravel Breeze.
+- **Dashboard**: A central hub providing an overview of your financial status.
+- **Transaction Management**: 
+  - Add, edit, delete, and categorize your income and expenses.
+  - **AI Receipt Scanning**: Automatically extract transaction details from receipts/images using the Gemini API.
+  - Export transactions for external use.
+- **Budgeting**: Set and monitor budgets for different categories to keep your spending in check.
+- **Financial Goals**: Define savings goals and adjust your progress over time.
+- **Interactive Reports**: Visualize your financial data with beautiful, interactive charts powered by Chart.js.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Database**: MongoDB (via `mongodb/laravel-mongodb`)
+- **Frontend**: Blade Templates, Tailwind CSS, Alpine.js
+- **Assets Bundler**: Vite
+- **Charts**: Chart.js
+- **AI Integration**: Google Gemini API
 
-## Learning Laravel
+## Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Before you begin, ensure you have the following installed on your local machine:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+- MongoDB server (running locally or a remote MongoDB Atlas URI)
+- Google Gemini API Key
 
-## Laravel Sponsors
+## Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Navigate to the project directory**:
+   ```bash
+   cd finance-app
+   ```
 
-### Premium Partners
+2. **Run the setup script** (this will install dependencies, create the `.env` file, generate the app key, run migrations, and build assets):
+   ```bash
+   composer run setup
+   ```
+   
+   *Alternatively, you can run the commands manually:*
+   ```bash
+   composer install
+   cp .env.example .env
+   php artisan key:generate
+   npm install
+   npm run build
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. **Configure Environment Variables**:
+   Open your `.env` file and configure your database settings to use MongoDB. You also need to add your Gemini API key for the receipt scanning feature to work.
+   
+   ```env
+   DB_CONNECTION=mongodb
+   DB_URI=mongodb://localhost:27017/finance_app
+   
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
 
-## Contributing
+4. **Run Database Migrations** (if not done by the setup script):
+   ```bash
+   php artisan migrate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Running the Application Locally
 
-## Code of Conduct
+You can run the development server which will start the Laravel server, Vite, queue listener, and logs concurrently:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer run dev
+```
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The application will be accessible at `http://localhost:8000`.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
